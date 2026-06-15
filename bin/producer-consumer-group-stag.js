@@ -4,18 +4,19 @@ const { Kafka } = require('kafkajs');
 const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 var qs = require('qs');
 const { exit } = require('process');
 var data = qs.stringify({
-  'client_id': '735fr4lpcgcfsb0bmlbjl3pn8c',
-  'client_secret': 'rnibqne6m43gnm2ja708vhahghh7p20uvfei7tfliuarv2p6qv1',
-  'grant_type': 'client_credentials',
+  'client_id': process.env.CLIENT_ID,
+  'client_secret': process.env.CLIENT_SECRET,
+  'grant_type': process.env.GRANT_TYPE,
 });
 
 var config = {
   method: 'post',
-  url: 'https://899ce57258d85f4caf87d3512fc4d819.auth.us-east-1.amazoncognito.com/oauth2/token',
+  url: process.env.AUTH_URL,
   headers: { 
     'Content-Type': 'application/x-www-form-urlencoded'
   },
